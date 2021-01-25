@@ -4,5 +4,5 @@ This is a repository containing all of the worked solutions I have completed for
 
 Fill in this later
 
-- Search: Includes tic-tac-toe
-- Knowledge
+- Search: Includes tic-tac-toe, and degrees
+- Knowledge 
