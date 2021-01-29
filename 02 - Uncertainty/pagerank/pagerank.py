@@ -74,7 +74,7 @@ def sample_pagerank(corpus, damping_factor, n):
     PageRank values should sum to 1.
     """
 
-    # initialise pageranks dict. I.e. All keys start of on count of 0.
+    # initialise page ranks dict. I.e. All keys start off on count of 0.
     page_ranks = dict(zip(corpus.keys(),[0]*len(corpus)))
 
     # initialise iterative process by selecting a random page to begin on and addding 1 to count for that page.
