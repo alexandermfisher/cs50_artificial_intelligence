@@ -4,7 +4,7 @@ import re
 import sys
 
 DAMPING = 0.85
-SAMPLES = 10000
+SAMPLES = 1000000
 
 
 def main():
@@ -89,7 +89,7 @@ def sample_pagerank(corpus, damping_factor, n):
         count += 1
     
     # normalise page_rank values by dividing by n.
-    for key in page_ranks.keys():
+    for key in page_ranks:
         page_ranks[key] /= n    
 
     return page_ranks
@@ -108,15 +108,15 @@ def iterate_pagerank(corpus, damping_factor):
     differences = dict(zip(corpus.keys(), [100] * len(corpus)))
 
     # if a page (in coprus) contains no links then add a link to every page in corpus. 
-    for page in corpus.keys():
+    for page in corpus:
         if len(corpus[page]) == 0:
             corpus[page] = corpus.keys()
 
-    # loop through updating page ranks according to formula until error tolerances below 0.001.
-    error_tol = 0.001
+    # loop through updating page ranks according to formula until difference below 0.001 (error tolerance).
+    error_tol = 0.0001
     keep_in_loop = True
     while keep_in_loop:
-        for page in page_ranks.keys():
+        for page in page_ranks:
             updated_page_rank = ((1-damping_factor)/len(corpus)) + (damping_factor * to_page_prob(page, corpus, page_ranks))
             differences[page] = abs(page_ranks[page] - updated_page_rank)
             page_ranks[page] = updated_page_rank
@@ -131,7 +131,7 @@ def to_page_prob(page_p,corpus,page_ranks):
     all other links. I.e. the second part of the PageRank Fomula.
     """
     probability = 0
-    for page_i in page_ranks.keys():
+    for page_i in page_ranks:
         if page_p in corpus[page_i]:
                     probability += page_ranks[page_i]/len(corpus[page_i])
     return probability
