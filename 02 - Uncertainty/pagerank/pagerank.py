@@ -4,7 +4,7 @@ import re
 import sys
 
 DAMPING = 0.85
-SAMPLES = 1000000
+SAMPLES = 10000
 
 
 def main():
@@ -113,7 +113,7 @@ def iterate_pagerank(corpus, damping_factor):
             corpus[page] = corpus.keys()
 
     # loop through updating page ranks according to formula until difference below 0.001 (error tolerance).
-    error_tol = 0.0001
+    error_tol = 0.005
     keep_in_loop = True
     while keep_in_loop:
         for page in page_ranks:
@@ -121,7 +121,7 @@ def iterate_pagerank(corpus, damping_factor):
             differences[page] = abs(page_ranks[page] - updated_page_rank)
             page_ranks[page] = updated_page_rank
 
-        if all(difference < error_tol for difference in differences.values()):
+        if all(difference <= error_tol for difference in differences.values()):
             keep_in_loop = False
     
     return page_ranks
